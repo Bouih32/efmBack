@@ -77,7 +77,7 @@ const deleteTask = async (req, res) => {
 };
 
 const deleteCategory = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
     const exists = await prisma.category.findFirst({ where: { id } });
     if (!exists) {
@@ -108,10 +108,10 @@ const getTasks = async (req, res) => {
 };
 
 const getTaskById = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   const userId = req.user.id;
   try {
-    const task = await prisma.task.findFirst({
+    const task = await prisma.task.findUnique({
       where: { id, userId },
       include: { taskCategory: { include: { category: true } } },
     });
@@ -126,9 +126,9 @@ const getTaskById = async (req, res) => {
 };
 
 const getCategoryById = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
-    const category = await prisma.category.findFirst({ where: { id } });
+    const category = await prisma.category.findUnique({ where: { id } });
     return res.status(200).send({ message: "Request successfully", category });
   } catch (error) {
     console.error("Error getting Category:", error);
@@ -139,7 +139,8 @@ const getCategoryById = async (req, res) => {
 };
 
 const editTask = async (req, res) => {
-  const { id, title, content } = req.body;
+  const { title, content } = req.body;
+  const { id } = req.params;
   const userId = req.user.id;
   try {
     const exists = await prisma.task.findFirst({
