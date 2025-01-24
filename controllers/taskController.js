@@ -142,10 +142,20 @@ const editTask = async (req, res) => {
   const { id, title, content } = req.body;
   const userId = req.user.id;
   try {
-    const exists = await prisma.task.update({
+    const exists = await prisma.task.findFirst({
       where: { userId, id },
-      data: { title, content },
     });
+
+    if (!exists) {
+      return res.status(404).send({ message: "not found" });
+    } else {
+      await prisma.task.update({
+        where: { userId, id },
+        data: { title, content },
+      });
+
+      return res.status(200).send({ message: "edited successfully" });
+    }
   } catch (error) {
     console.error("Error editing task:", error);
     return res
