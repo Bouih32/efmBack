@@ -65,7 +65,10 @@ const deleteTask = async (req, res) => {
     if (!exists) {
       return res.status(404).send({ message: "Task not found" });
     } else {
-      await prisma.task.delete({ where: { id: exists.id } });
+      await prisma.task.update({
+        where: { id: exists.id },
+        data: { deletedAt: new Date() },
+      });
       return res.status(200).send({ message: "Task deleted successfully" });
     }
   } catch (error) {
