@@ -1,6 +1,6 @@
 # Notes Manager
 
-An intuitive web application designed to help you organize and manage your notes efficiently. Built with Express.js and secured with JSON Web Tokens (JWT) and express-validator.
+A backend API that enables users to manage their daily tasks effectively. The system supports CRUD operations.
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -22,7 +22,7 @@ Ensure you have the following installed on your local machine:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/Bouih32/notesManager.git
+git clone https://github.com/Bouih32/efmBack.git
 cd notesManager
 ```
 
@@ -36,9 +36,7 @@ npm install
 
 Create .env file with :
 
-- MY_EMAIL
 - PORT =4000
-- GMAIL_KEY
 - JWT_SECRET
 - DATABASE_URL
 
