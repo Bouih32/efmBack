@@ -59,9 +59,9 @@ const addCategory = async (req, res) => {
 };
 
 const deleteTask = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
-    const exists = await prisma.task.findFirst({ where: { id } });
+    const exists = await prisma.task.findUnique({ where: { id } });
     if (!exists) {
       return res.status(404).send({ message: "Task not found" });
     } else {
@@ -79,7 +79,7 @@ const deleteTask = async (req, res) => {
 const deleteCategory = async (req, res) => {
   const { id } = req.params;
   try {
-    const exists = await prisma.category.findFirst({ where: { id } });
+    const exists = await prisma.category.findUnique({ where: { id } });
     if (!exists) {
       return res.status(404).send({ message: "Category not found" });
     } else {
@@ -143,7 +143,7 @@ const editTask = async (req, res) => {
   const { id } = req.params;
   const userId = req.user.id;
   try {
-    const exists = await prisma.task.findFirst({
+    const exists = await prisma.task.findUnique({
       where: { userId, id },
     });
 
