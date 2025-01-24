@@ -73,7 +73,7 @@ Tasks Routes :
 - PUT /tasks/:id : Edit a task by ID.
 - GET /tasks/:id : Get a task by ID.
 - GET /tasks/category/:id : Get a category by ID.
-- DELETE /tasks/:id : Delete a task by ID.
+- PATCH /tasks/delete/:id : Delete a task by ID.
 - DELETE /tasks/category/:id : Delete a category by ID.
 
 ## License

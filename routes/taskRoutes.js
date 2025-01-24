@@ -31,6 +31,6 @@ router.post(
 router.put("/:id", authenticateToken, taskValidation, validateData, editTask);
 router.get("/:id", authenticateToken, getTaskById);
 router.get("/category/:id", authenticateToken, getCategoryById);
-router.delete("/:id", authenticateToken, deleteTask);
+router.patch("/delete/:id", authenticateToken, deleteTask);
 router.delete("/category/:id", authenticateToken, deleteCategory);
 module.exports = router;
